@@ -21,16 +21,38 @@ async function main() {
         }
 
     }
+    
     const terminal_write = (e) => {
         let new_line = document.createElement("pre");
         terminal.append(new_line);
         new_line.innerHTML = e;
     }
     const terminal_execute_command = (e) => {
-        terminal_write(e)
+        const command = e.split(" ");
+        // try {
+        const called_function = command[0];
+
+       
+        command.shift();
+
+        // } catch (error) {
+            
+        // }
+        let command_arguments = []
+        for (let index = 0; index < command.length; index++) {
+            command_arguments.push(command[index]);
+            
+        }
+     
+        terminal_commands[called_function](command_arguments.join(","));
+        
         terminal_input_and_read()
     }
-   
+   const terminal_commands = {
+       print: terminal_write,
+       
+
+    }
     const terminal_input_and_read = () => {
         let new_line = document.createElement("pre");
         let new_input_area = document.createElement("input");
